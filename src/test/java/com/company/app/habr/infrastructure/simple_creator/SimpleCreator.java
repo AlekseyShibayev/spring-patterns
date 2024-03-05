@@ -22,7 +22,7 @@ public class SimpleCreator {
         return habrRepository.save(new Habr().setStatus(status));
     }
 
-    public void addUser(Habr habr, String name) {
+    public void addHabrUser(Habr habr, String name) {
         HabrUser user = new HabrUser()
             .setName(name)
             .setHabr(habr);

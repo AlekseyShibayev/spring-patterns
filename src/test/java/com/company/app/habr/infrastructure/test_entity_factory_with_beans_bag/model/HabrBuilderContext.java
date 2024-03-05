@@ -48,7 +48,7 @@ public class HabrBuilderContext {
         return this;
     }
 
-    public HabrBuilderContext withHabrUser(String name) {
+    public HabrBuilderContext addHabrUser(String name) {
         enrichesChain.add(habrBuilderContext -> {
             TestEntityFactoryBeansBag beansBag = habrBuilderContext.getBeansBag();
             HabrUserRepository habrUserRepository = beansBag.getHabrUserRepository();

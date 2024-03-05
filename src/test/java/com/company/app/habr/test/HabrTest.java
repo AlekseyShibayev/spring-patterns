@@ -43,7 +43,7 @@ class HabrTest extends SpringBootTestApplication {
     void step_1_simpleCreator_test() {
         Habr habr = transactionTemplate.execute(status -> {
             Habr save = simpleCreator.createMinimumPosibleHabr(Status.ON);
-            simpleCreator.addUser(save, NAME);
+            simpleCreator.addHabrUser(save, NAME);
             return save;
         });
 
@@ -78,7 +78,7 @@ class HabrTest extends SpringBootTestApplication {
     @Test
     void step_4_testEntityFactory_test_with_impl_as_method() {
         Habr habr = testEntityFactoryWithBeansBag.habrBy(Status.ON)
-            .withHabrUser(NAME)
+            .addHabrUser(NAME)
             .createOne();
 
         Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());
@@ -90,7 +90,7 @@ class HabrTest extends SpringBootTestApplication {
     @Test
     void step_5_testPrototypeFactoryFacade_test() {
         Habr habr = testEntityFactoryWithPrototype.habrBy(Status.ON)
-            .withHabrUser(NAME)
+            .addHabrUser(NAME)
             .createOne();
 
         Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());
@@ -102,11 +102,11 @@ class HabrTest extends SpringBootTestApplication {
     @Test
     void step_6_testPrototypeFactoryFacade_test() {
         Habr on = testEntityFactoryWithPrototype.habrBy(Status.ON)
-            .withHabrUser(NAME)
-            .withHabrUser(NAME2)
+            .addHabrUser(NAME)
+            .addHabrUser(NAME2)
             .createOne();
         Habr off = testEntityFactoryWithPrototype.habrBy(Status.OFF)
-            .withHabrUser(NAME2)
+            .addHabrUser(NAME2)
             .createOne();
 
         Assertions.assertEquals(on.getStatus().name(), Status.ON.name());

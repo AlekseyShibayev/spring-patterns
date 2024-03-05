@@ -54,7 +54,7 @@ public class HabrPrototype {
         return this;
     }
 
-    public HabrPrototype withHabrUser(String name) {
+    public HabrPrototype addHabrUser(String name) {
         chain.add(habr -> habrPrototypeService.enrichHabrByHabrUserName(habr, name));
         return this;
     }
