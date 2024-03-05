@@ -17,7 +17,7 @@ public class HabrPrototypeService {
     private final HabrRepository habrRepository;
     private final HabrUserRepository habrUserRepository;
 
-    public void enrichHabrByHabrUserName(Habr habr, String name) {
+    public void addHabrUser(Habr habr, String name) {
         HabrUser user = new HabrUser()
             .setHabr(habr)
             .setName(name);

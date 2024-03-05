@@ -6,7 +6,7 @@ import java.util.List;
 import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.HabrPrototypeService;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestEntityFactoryWithPrototypeFinisher;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestEntityFactoryFinisher;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -29,7 +29,7 @@ public class HabrPrototype {
     private int amount;
 
     @Autowired
-    private TestEntityFactoryWithPrototypeFinisher testPrototypeFactoryFinisher;
+    private TestEntityFactoryFinisher testPrototypeFactoryFinisher;
     @Autowired
     private HabrPrototypeService habrPrototypeService;
 
@@ -49,13 +49,13 @@ public class HabrPrototype {
     /**
      * intermediate operations
      */
-    public HabrPrototype with(EnrichCallback enrich) {
-        chain.add(enrich);
+    public HabrPrototype with(EnrichCallback enrichCallback) {
+        chain.add(enrichCallback);
         return this;
     }
 
     public HabrPrototype addHabrUser(String name) {
-        chain.add(habr -> habrPrototypeService.enrichHabrByHabrUserName(habr, name));
+        chain.add(habr -> habrPrototypeService.addHabrUser(habr, name));
         return this;
     }
 

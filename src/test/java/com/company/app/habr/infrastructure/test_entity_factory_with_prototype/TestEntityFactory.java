@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TestEntityFactoryWithPrototype {
+public class TestEntityFactory {
 
     private final ObjectFactory<HabrPrototype> habrPrototypeObjectFactory;
 

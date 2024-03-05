@@ -34,15 +34,12 @@ public abstract class SpringBootTestApplication {
     /**
      * @Repository
      */
-
     /**
      * @MockBean
      */
     /**
      * @SpyBean
      */
-
-
     @PostConstruct
     void init() {
         log.debug("**********     run spring boot test context     **********");

@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TestEntityFactoryWithPrototypeFinisher {
+public class TestEntityFactoryFinisher {
 
     private final SimpleCreator simpleCreator;
     private final HabrRepository habrRepository;

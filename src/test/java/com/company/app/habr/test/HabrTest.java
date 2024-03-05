@@ -6,7 +6,7 @@ import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.domain.repository.HabrUserRepository;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.TestEntityFactoryWithPrototype;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.TestEntityFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class HabrTest extends SpringBootTestApplication {
     @Autowired
     private SimpleCreator simpleCreator;
     @Autowired
-    private TestEntityFactoryWithPrototype testEntityFactoryWithPrototype;
+    private TestEntityFactory testEntityFactory;
     @Autowired
     private HabrRepository habrRepository;
     @Autowired
@@ -50,7 +50,7 @@ class HabrTest extends SpringBootTestApplication {
 
     @Test
     void step_5_testPrototypeFactoryFacade_test() {
-        Habr habr = testEntityFactoryWithPrototype.habrBy(Status.ON)
+        Habr habr = testEntityFactory.habrBy(Status.ON)
             .addHabrUser(NAME)
             .createOne();
 
@@ -62,11 +62,11 @@ class HabrTest extends SpringBootTestApplication {
 
     @Test
     void step_6_testPrototypeFactoryFacade_test() {
-        Habr on = testEntityFactoryWithPrototype.habrBy(Status.ON)
+        Habr on = testEntityFactory.habrBy(Status.ON)
             .addHabrUser(NAME)
             .addHabrUser(NAME2)
             .createOne();
-        Habr off = testEntityFactoryWithPrototype.habrBy(Status.OFF)
+        Habr off = testEntityFactory.habrBy(Status.OFF)
             .addHabrUser(NAME2)
             .createOne();
 
