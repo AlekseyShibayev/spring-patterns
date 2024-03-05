@@ -29,7 +29,6 @@ public class TestEntityFactoryFinisher {
         for (int i = 0; i < context.getAmount(); i++) {
             result.add(createOne(context));
         }
-        log.debug("entity has been created");
         return result;
     }
 
