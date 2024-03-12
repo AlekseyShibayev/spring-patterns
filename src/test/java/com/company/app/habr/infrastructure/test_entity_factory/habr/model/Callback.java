@@ -1,4 +1,4 @@
-package com.company.app.habr.infrastructure.test_entity_factory.model;
+package com.company.app.habr.infrastructure.test_entity_factory.habr.model;
 
 import com.company.app.habr.domain.entity.Habr;
 

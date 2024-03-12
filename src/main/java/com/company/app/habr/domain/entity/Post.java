@@ -35,7 +35,7 @@ public class Post implements Serializable {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "participant_id")
     private Participant participant;
 
 }

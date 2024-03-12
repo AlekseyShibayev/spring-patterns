@@ -1,11 +1,11 @@
-package com.company.app.habr.infrastructure.test_entity_factory.model;
+package com.company.app.habr.infrastructure.test_entity_factory.habr.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.company.app.habr.domain.entity.Habr;
-import com.company.app.habr.domain.enums.Status;
-import com.company.app.habr.infrastructure.test_entity_factory.service.HabrPrototypeService;
+import com.company.app.habr.domain.enums.StatusType;
+import com.company.app.habr.infrastructure.test_entity_factory.habr.service.HabrPrototypeService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class HabrPrototype {
 
-    private Status status;
+    private StatusType status;
     private HabrPrototypeService habrPrototypeService;
     private List<Callback> chain = new ArrayList<>();
     private int amount;

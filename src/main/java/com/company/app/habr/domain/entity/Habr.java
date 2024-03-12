@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.app.habr.domain.enums.Status;
+import com.company.app.habr.domain.enums.StatusType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -37,11 +37,11 @@ public class Habr implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status_type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private StatusType statusType;
 
     @OneToMany(mappedBy = "habr", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Participant> users = new ArrayList<>();
+    private List<Participant> participants = new ArrayList<>();
 
 }

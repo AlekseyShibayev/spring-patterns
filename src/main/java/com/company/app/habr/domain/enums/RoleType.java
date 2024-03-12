@@ -1,7 +1,7 @@
 package com.company.app.habr.domain.enums;
 
-public enum Status {
+public enum RoleType {
 
-    ON, OFF
+    WRITER, READER
 
 }

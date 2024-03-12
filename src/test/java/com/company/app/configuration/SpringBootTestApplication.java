@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.domain.repository.PostRepository;
 import com.company.app.habr.domain.repository.ParticipantRepository;
+import com.company.app.habr.domain.repository.RoleRepository;
+import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
 import com.company.app.habr.infrastructure.test_entity_factory.TestEntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -31,6 +33,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public abstract class SpringBootTestApplication {
 
     @Autowired
+    protected SimpleCreator simpleCreator;
+    @Autowired
     protected TransactionTemplate transactionTemplate;
     @Autowired
     protected TestEntityFactory testEntityFactory;
@@ -38,11 +42,13 @@ public abstract class SpringBootTestApplication {
      * @Repository
      */
     @Autowired
-    private HabrRepository habrRepository;
+    protected HabrRepository habrRepository;
     @Autowired
-    private ParticipantRepository participantRepository;
+    protected ParticipantRepository participantRepository;
     @Autowired
-    private PostRepository postRepository;
+    protected RoleRepository roleRepository;
+    @Autowired
+    protected PostRepository postRepository;
     /**
      * @MockBean
      */

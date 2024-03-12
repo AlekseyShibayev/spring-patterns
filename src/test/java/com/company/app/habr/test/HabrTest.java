@@ -1,8 +1,14 @@
 package com.company.app.habr.test;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.habr.domain.entity.Habr;
-import com.company.app.habr.domain.enums.Status;
+import com.company.app.habr.domain.entity.Participant;
+import com.company.app.habr.domain.entity.Post;
+import com.company.app.habr.domain.entity.Role;
+import com.company.app.habr.domain.enums.RoleType;
+import com.company.app.habr.domain.enums.StatusType;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,56 +17,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 class HabrTest extends SpringBootTestApplication {
 
-    private static final String NAME = "name";
-    private static final String NAME2 = "name2";
-
-    @Autowired
-    private SimpleCreator simpleCreator;
+    private static final String NAME = "Ivan";
+    private static final String NAME2 = "Igor";
 
     @Test
     void step_1_simpleCreator_test() {
         Habr habr = transactionTemplate.execute(status -> {
-            Habr save = simpleCreator.createMinimumPosibleHabr(Status.ON);
-            simpleCreator.addParticipant(save, NAME);
-            return save;
+            Habr minimumPossibleHabr = simpleCreator.createMinimumPossibleHabr(StatusType.ON);
+            Post minimumPossiblePost = simpleCreator.createMinimumPossiblePost("title");
+            Role reader = roleRepository.findByRoleType(RoleType.READER).orElseThrow(EntityNotFoundException::new);
+            Participant participant = simpleCreator.createMinimumPossibleParticipant(NAME);
+
+            participant.setHabr(minimumPossibleHabr);
+            participant.getPosts().add(minimumPossiblePost);
+            participant.setRole(reader);
+            participantRepository.save(participant);
+
+            minimumPossibleHabr.getParticipants().add(participant);
+            return habrRepository.save(minimumPossibleHabr);
         });
 
-        Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());
-        Assertions.assertEquals(1, habr.getUsers().size());
-        Assertions.assertEquals(NAME, habr.getUsers().get(0).getName());
-        Assertions.assertNotNull(habr.getUsers().get(0).getId());
+        Assertions.assertEquals(habr.getStatusType().name(), StatusType.ON.name());
+        Assertions.assertEquals(1, habr.getParticipants().size());
+
+        Participant participant = habr.getParticipants().get(0);
+        Assertions.assertEquals(NAME, participant.getName());
+        Assertions.assertEquals(RoleType.READER, participant.getRole().getRoleType());
+        Assertions.assertNotNull(habr.getParticipants().get(0).getId());
     }
 
     @Test
     void step_5_testPrototypeFactoryFacade_test() {
-        Habr habr = testEntityFactory.habrBy(Status.ON)
+        Habr habr = testEntityFactory.habrBy(StatusType.ON)
             .addParticipant(NAME)
             .createOne();
 
-        Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());
-        Assertions.assertEquals(1, habr.getUsers().size());
-        Assertions.assertEquals(NAME, habr.getUsers().get(0).getName());
-        Assertions.assertNotNull(habr.getUsers().get(0).getId());
+        Assertions.assertEquals(habr.getStatusType().name(), StatusType.ON.name());
+        Assertions.assertEquals(1, habr.getParticipants().size());
+        Assertions.assertEquals(NAME, habr.getParticipants().get(0).getName());
+        Assertions.assertNotNull(habr.getParticipants().get(0).getId());
     }
 
     @Test
     void step_6_testPrototypeFactoryFacade_test() {
-        Habr on = testEntityFactory.habrBy(Status.ON)
+        Habr on = testEntityFactory.habrBy(StatusType.ON)
             .addParticipant(NAME)
             .addParticipant(NAME2)
             .createOne();
-        Habr off = testEntityFactory.habrBy(Status.OFF)
+        Habr off = testEntityFactory.habrBy(StatusType.OFF)
             .addParticipant(NAME2)
             .createOne();
 
-        Assertions.assertEquals(on.getStatus().name(), Status.ON.name());
-        Assertions.assertEquals(2, on.getUsers().size());
-        Assertions.assertNotNull(on.getUsers().get(0).getId());
+        Assertions.assertEquals(on.getStatusType().name(), StatusType.ON.name());
+        Assertions.assertEquals(2, on.getParticipants().size());
+        Assertions.assertNotNull(on.getParticipants().get(0).getId());
 
-        Assertions.assertEquals(off.getStatus().name(), Status.OFF.name());
-        Assertions.assertEquals(1, off.getUsers().size());
-        Assertions.assertEquals(NAME2, off.getUsers().get(0).getName());
-        Assertions.assertNotNull(off.getUsers().get(0).getId());
+        Assertions.assertEquals(off.getStatusType().name(), StatusType.OFF.name());
+        Assertions.assertEquals(1, off.getParticipants().size());
+        Assertions.assertEquals(NAME2, off.getParticipants().get(0).getName());
+        Assertions.assertNotNull(off.getParticipants().get(0).getId());
     }
 
 }
