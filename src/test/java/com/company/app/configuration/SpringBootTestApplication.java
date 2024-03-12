@@ -1,8 +1,11 @@
 package com.company.app.configuration;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
 
+import com.company.app.habr.domain.repository.HabrRepository;
+import com.company.app.habr.domain.repository.PostRepository;
+import com.company.app.habr.domain.repository.ParticipantRepository;
+import com.company.app.habr.infrastructure.test_entity_factory.TestEntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,10 +33,16 @@ public abstract class SpringBootTestApplication {
     @Autowired
     protected TransactionTemplate transactionTemplate;
     @Autowired
-    protected EntityManager entityManager;
+    protected TestEntityFactory testEntityFactory;
     /**
      * @Repository
      */
+    @Autowired
+    private HabrRepository habrRepository;
+    @Autowired
+    private ParticipantRepository participantRepository;
+    @Autowired
+    private PostRepository postRepository;
     /**
      * @MockBean
      */
@@ -51,6 +60,8 @@ public abstract class SpringBootTestApplication {
 
     @AfterEach
     protected void doAfterEach() {
+        participantRepository.deleteAllInBatch();
+        habrRepository.deleteAllInBatch();
     }
 
 }
