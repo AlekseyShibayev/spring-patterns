@@ -2,10 +2,9 @@ package com.company.app.configuration;
 
 import javax.annotation.PostConstruct;
 
-import com.company.app.habr.domain.repository.HabrRepository;
-import com.company.app.habr.domain.repository.PostRepository;
-import com.company.app.habr.domain.repository.ParticipantRepository;
-import com.company.app.habr.domain.repository.RoleRepository;
+import com.company.app.domain.repository.ParticipantRepository;
+import com.company.app.domain.repository.PostRepository;
+import com.company.app.domain.repository.RankRepository;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
 import com.company.app.habr.infrastructure.test_entity_factory.TestEntityFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -42,13 +41,11 @@ public abstract class SpringBootTestApplication {
      * @Repository
      */
     @Autowired
-    protected HabrRepository habrRepository;
-    @Autowired
     protected ParticipantRepository participantRepository;
     @Autowired
-    protected RoleRepository roleRepository;
-    @Autowired
     protected PostRepository postRepository;
+    @Autowired
+    protected RankRepository rankRepository;
     /**
      * @MockBean
      */
@@ -67,7 +64,7 @@ public abstract class SpringBootTestApplication {
     @AfterEach
     protected void doAfterEach() {
         participantRepository.deleteAllInBatch();
-        habrRepository.deleteAllInBatch();
+        postRepository.deleteAllInBatch();
     }
 
 }

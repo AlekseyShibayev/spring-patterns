@@ -1,6 +1,6 @@
-package com.company.app.habr.domain.repository;
+package com.company.app.domain.repository;
 
-import com.company.app.habr.domain.entity.Post;
+import com.company.app.domain.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
