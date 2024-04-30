@@ -34,6 +34,9 @@ public class ParticipantPrototypeFinisher {
     }
 
     private Participant createOne(ParticipantPrototype prototype) {
+        /**
+         * step 1 - create minimum possible @Entity and persist
+         */
         RankType rankType = prototype.getRankType();
         Rank rank = rankRepository.findByRankType(rankType);
 
@@ -42,6 +45,14 @@ public class ParticipantPrototypeFinisher {
             .setRank(rank);
         participantRepository.save(participant);
 
+        /**
+         * step 2 - add default values
+         */
+
+
+        /**
+         * step 3 - modify @Entity by chain
+         */
         List<Callback> chain = prototype.getChain();
         chain.forEach(callback -> callback.modify(participant));
 

@@ -30,7 +30,7 @@ public class ParticipantPrototypeService {
 
     public void setParticipantName(Participant participant, String participantName) {
         participant.setName(participantName);
-        participantRepository.save(participant);
+        participantRepository.save(participant); // добавил для наглядности, мы в транзакции, сохранит при commit и без .save()
     }
 
     public void addPost(Participant participant, String postTitle) {
@@ -40,7 +40,7 @@ public class ParticipantPrototypeService {
         postRepository.save(post);
 
         participant.getPosts().add(post);
-        participantRepository.save(participant);
+        participantRepository.save(participant); // добавил для наглядности, мы в транзакции, сохранит при commit и без .save()
     }
 
 }
