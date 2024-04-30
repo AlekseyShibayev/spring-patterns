@@ -3,7 +3,7 @@ package com.company.app.habr.infrastructure.test_entity_factory.participant.serv
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.app.habr.domain.entity.Participant;
+import com.company.app.domain.entity.Participant;
 import com.company.app.habr.infrastructure.test_entity_factory.participant.model.ParticipantPrototype;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

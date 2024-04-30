@@ -5,7 +5,6 @@ import javax.annotation.PostConstruct;
 import com.company.app.domain.repository.ParticipantRepository;
 import com.company.app.domain.repository.PostRepository;
 import com.company.app.domain.repository.RankRepository;
-import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
 import com.company.app.habr.infrastructure.test_entity_factory.TestEntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -31,8 +30,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class SpringBootTestApplication {
 
-    @Autowired
-    protected SimpleCreator simpleCreator;
     @Autowired
     protected TransactionTemplate transactionTemplate;
     @Autowired

@@ -36,7 +36,7 @@ public class Rank implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "role_type", nullable = false)
+    @Column(name = "rank_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private RankType rankType;
 

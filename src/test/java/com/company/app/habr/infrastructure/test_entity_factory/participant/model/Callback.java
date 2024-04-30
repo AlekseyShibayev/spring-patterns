@@ -1,6 +1,7 @@
 package com.company.app.habr.infrastructure.test_entity_factory.participant.model;
 
-import com.company.app.habr.domain.entity.Participant;
+
+import com.company.app.domain.entity.Participant;
 
 
 @FunctionalInterface

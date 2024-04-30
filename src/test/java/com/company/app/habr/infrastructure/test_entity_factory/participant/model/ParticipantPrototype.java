@@ -3,7 +3,7 @@ package com.company.app.habr.infrastructure.test_entity_factory.participant.mode
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.app.habr.domain.entity.Participant;
+import com.company.app.domain.entity.Participant;
 import com.company.app.habr.infrastructure.test_entity_factory.participant.service.ParticipantPrototypeService;
 import lombok.Getter;
 import lombok.Setter;
