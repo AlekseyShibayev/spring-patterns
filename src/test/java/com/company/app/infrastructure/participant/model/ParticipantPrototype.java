@@ -1,10 +1,11 @@
-package com.company.app.habr.infrastructure.test_entity_factory.participant.model;
+package com.company.app.infrastructure.participant.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.company.app.domain.entity.Participant;
-import com.company.app.habr.infrastructure.test_entity_factory.participant.service.ParticipantPrototypeService;
+import com.company.app.domain.enums.RankType;
+import com.company.app.infrastructure.participant.service.ParticipantPrototypeService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -15,7 +16,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ParticipantPrototype {
 
-    private String name;
+    private RankType rankType;
     private ParticipantPrototypeService participantPrototypeService;
     private List<Callback> chain = new ArrayList<>();
     private int amount;
@@ -38,6 +39,16 @@ public class ParticipantPrototype {
      */
     public ParticipantPrototype with(Callback callback) {
         chain.add(callback);
+        return this;
+    }
+
+    public ParticipantPrototype withName(String participantName) {
+        chain.add(participant -> participantPrototypeService.setParticipantName(participant, participantName));
+        return this;
+    }
+
+    public ParticipantPrototype withPost(String customTitle) {
+        chain.add(participant -> participantPrototypeService.addPost(participant, customTitle));
         return this;
     }
 

@@ -1,4 +1,4 @@
-package com.company.app.fluent_interface;
+package com.company.app.fluent_interface.step_1;
 
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.domain.entity.Participant;
@@ -9,24 +9,25 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-class FluentInterfaceTest extends SpringBootTestApplication {
+class ManualImperativeCreatingExampleTest extends SpringBootTestApplication {
 
     @Test
-    void step_1() {
+    void test() {
         Participant participant = createParticipantManualAndImperative("name", "post", RankType.WRITER);
+
         Assertions.assertEquals(RankType.WRITER, participant.getRank().getRankType());
     }
 
-    private Participant createParticipantManualAndImperative(String name, String title, RankType rankType) {
+    private Participant createParticipantManualAndImperative(String participantName, String postTitle, RankType rankType) {
         Rank rank = rankRepository.findByRankType(rankType);
 
         Participant participant = new Participant()
             .setRank(rank)
-            .setName(name);
+            .setName(participantName);
         participantRepository.save(participant);
 
         Post post = new Post()
-            .setTitle(title);
+            .setTitle(postTitle);
         Post persist = postRepository.save(post);
 
         participant.getPosts().add(post);
@@ -37,22 +38,5 @@ class FluentInterfaceTest extends SpringBootTestApplication {
 
         return participant;
     }
-
-    /**
-     *   public Habr createMinimumPosibleHabr(Status status) {
-     *         return habrRepository.save(new Habr()
-     *             .setStatus(status));
-     *     }
-     *
-     *     public void addParticipant(Habr habr, String name) {
-     *         Participant user = new Participant()
-     *             .setName(name)
-     *             .setHabr(habr);
-     *         participantRepository.save(user);
-     *         habr.getUsers().add(user);
-     *         habrRepository.save(habr);
-     *     }
-     *
-     */
 
 }

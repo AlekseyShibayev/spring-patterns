@@ -5,7 +5,7 @@ import javax.annotation.PostConstruct;
 import com.company.app.domain.repository.ParticipantRepository;
 import com.company.app.domain.repository.PostRepository;
 import com.company.app.domain.repository.RankRepository;
-import com.company.app.habr.infrastructure.test_entity_factory.TestEntityFactory;
+import com.company.app.infrastructure.TestEntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,8 +60,8 @@ public abstract class SpringBootTestApplication {
 
     @AfterEach
     protected void doAfterEach() {
-        participantRepository.deleteAllInBatch();
         postRepository.deleteAllInBatch();
+        participantRepository.deleteAllInBatch();
     }
 
 }

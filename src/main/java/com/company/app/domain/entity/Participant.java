@@ -40,7 +40,7 @@ public class Participant implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "rank_id")
+    @JoinColumn(name = "rank_id", nullable = false)
     private Rank rank;
 
     @OneToMany(mappedBy = "participant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

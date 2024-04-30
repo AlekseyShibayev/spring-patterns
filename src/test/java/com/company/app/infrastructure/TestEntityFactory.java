@@ -1,7 +1,8 @@
-package com.company.app.habr.infrastructure.test_entity_factory;
+package com.company.app.infrastructure;
 
-import com.company.app.habr.infrastructure.test_entity_factory.participant.model.ParticipantPrototype;
-import com.company.app.habr.infrastructure.test_entity_factory.participant.service.ParticipantPrototypeService;
+import com.company.app.domain.enums.RankType;
+import com.company.app.infrastructure.participant.model.ParticipantPrototype;
+import com.company.app.infrastructure.participant.service.ParticipantPrototypeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ public class TestEntityFactory {
 
     private final ParticipantPrototypeService participantPrototypeService;
 
-    public ParticipantPrototype participantBy(String name) {
+    public ParticipantPrototype participantBy(RankType rankType) {
         return new ParticipantPrototype()
-            .setName(name)
+            .setRankType(rankType)
             .setParticipantPrototypeService(participantPrototypeService);
     }
 
