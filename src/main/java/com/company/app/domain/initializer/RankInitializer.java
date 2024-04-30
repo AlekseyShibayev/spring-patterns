@@ -1,10 +1,8 @@
 package com.company.app.domain.initializer;
 
 import javax.annotation.PostConstruct;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.company.app.domain.entity.Rank;
 import com.company.app.domain.enums.RankType;
