@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.company.app.domain.entity.Participant;
 import com.company.app.domain.entity.Post;
-import com.company.app.domain.entity.Rank;
 import com.company.app.domain.repository.ParticipantRepository;
 import com.company.app.domain.repository.PostRepository;
 import com.company.app.domain.repository.RankRepository;
@@ -26,11 +25,6 @@ public class ParticipantPrototypeService {
 
     public List<Participant> create(ParticipantPrototype prototype) {
         return participantPrototypeFinisher.create(prototype);
-    }
-
-    public void setParticipantName(Participant participant, String participantName) {
-        participant.setName(participantName);
-        participantRepository.save(participant); // добавил для наглядности, мы в транзакции, сохранит при commit и без .save()
     }
 
     public void addPost(Participant participant, String postTitle) {

@@ -43,7 +43,7 @@ public class ParticipantPrototype {
     }
 
     public ParticipantPrototype withName(String participantName) {
-        chain.add(participant -> participantPrototypeService.setParticipantName(participant, participantName));
+        chain.add(participant -> participant.setName(participantName));
         return this;
     }
 
