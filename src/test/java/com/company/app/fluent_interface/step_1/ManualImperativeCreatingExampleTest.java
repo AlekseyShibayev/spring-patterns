@@ -19,22 +19,23 @@ class ManualImperativeCreatingExampleTest extends SpringBootTestApplication {
     }
 
     private Participant createParticipantManualAndImperative(String participantName, String postTitle, RankType rankType) {
-        Rank rank = rankRepository.findByRankType(rankType);
+        Rank rank = rankRepository.findByRankType(rankType); // вытащить Rank из бд
 
-        Participant participant = new Participant()
+        Participant participant = new Participant() // создать новый Participant
             .setRank(rank)
             .setName(participantName);
-        participantRepository.save(participant);
+        participantRepository.save(participant); // заперсистить
 
-        Post post = new Post()
+        Post post = new Post() // создать новый Post
             .setTitle(postTitle);
-        Post persist = postRepository.save(post);
+        postRepository.save(post); // заперсистить
 
+        // переженить Participant и Post
         participant.getPosts().add(post);
         participantRepository.save(participant);
 
-        persist.setParticipant(participant);
-        postRepository.save(persist);
+        post.setParticipant(participant);
+        postRepository.save(post);
 
         return participant;
     }
